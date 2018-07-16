@@ -43,7 +43,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel2.setText("Contraseña");
 
-        btningresar.setText("Inicio de Secion");
+        btningresar.setText("Inicio de Sesion");
 
         jLabel3.setText("Nuevo Registro de Cliente");
 

@@ -126,7 +126,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btningresar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Inicio de Secion"/>
+            <Property name="text" type="java.lang.String" value="Inicio de Sesion"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">

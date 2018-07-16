@@ -22,6 +22,7 @@ public class Cliente {
     private String numTelefono;
     private Direccion direccionEnvio;
 
+    public Cliente(){}
     public Cliente(int id, String cedula, String apellidos, String nombres, Date fechaNacimiento, int genero, String numTelefono, Direccion direccionEnvio) {
         this.id = id;
         this.cedula = cedula;

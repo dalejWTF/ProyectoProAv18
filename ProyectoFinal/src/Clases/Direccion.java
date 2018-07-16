@@ -16,6 +16,8 @@ public class Direccion {
     private String callesRes;
     private String ciudad;
 
+    public Direccion(){}
+    
     public Direccion(int id_direccion, int id_pais, String callesRes, String ciudad) {
         this.id_direccion = id_direccion;
         this.id_pais = id_pais;
