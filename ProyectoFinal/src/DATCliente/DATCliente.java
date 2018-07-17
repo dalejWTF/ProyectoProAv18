@@ -18,7 +18,7 @@ public class DATCliente {
     ConnectionSQL conect= new ConnectionSQL();
     public ResultSet getCliente(String cedula) throws ClassNotFoundException, SQLException{
         Statement ps= null;
-        String sql="SELECT c.cedula, c.apellidos, c.nombres, c.fechaNacimiento, c.numTelefono, p.nombre pais,d.ciudad, d.calles, g.id genero, t.tipo FROM cliente c, pais p, direccion d, genero g, tipo t,usuario u WHERE c.direccion=d.id AND d.id_pais=p.id AND g.id=c.genero AND t.id= u.id_tipo AND c.cedula="+cedula;
+        String sql="SELECT c.cedula, c.apellidos, c.nombres, c.fechaNacimiento, c.numTelefono, p.id pais,d.ciudad, d.calles, g.id genero, u.usuario, u.contrasena, t.id tipo FROM cliente c, pais p, direccion d, genero g, tipo t,usuario u WHERE c.direccion=d.id AND d.id_pais=p.id AND g.id=c.genero AND t.id= u.id_tipo AND c.cedula="+cedula;
         ps= conect.getConnection().createStatement();
         
         return ps.executeQuery(sql);

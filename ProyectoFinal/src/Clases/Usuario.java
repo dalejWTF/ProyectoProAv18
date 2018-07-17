@@ -17,6 +17,7 @@ public class Usuario {
     private String usuario;
     private String pass;
 
+    public Usuario(){}
     public Usuario(int id_usuario, Cliente cliente, int id_tipo, String usuario, String pass) {
         this.id_usuario = id_usuario;
         this.cliente = cliente;
