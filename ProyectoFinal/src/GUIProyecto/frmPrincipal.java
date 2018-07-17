@@ -5,6 +5,14 @@
  */
 package GUIProyecto;
 
+import Clases.Usuario;
+import LNCliente.ManejadorCliente;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
@@ -32,7 +40,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtusuario = new javax.swing.JTextField();
-        txtcontraseña = new javax.swing.JTextField();
+        txtcontrasena = new javax.swing.JTextField();
         btningresar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnregistrar = new javax.swing.JButton();
@@ -45,6 +53,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel2.setText("Contraseña");
 
         btningresar.setText("Inicio de Sesion");
+        btningresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btningresarMouseClicked(evt);
+            }
+        });
 
         jLabel3.setText("¿Eres nuevo?");
 
@@ -68,7 +81,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -96,7 +109,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(31, 31, 31)
                 .addComponent(btningresar)
@@ -130,9 +143,35 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void btnregistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnregistrarMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        frmCliente registrar= new frmCliente();
+        frmRegCliente registrar = new frmRegCliente();
         registrar.setVisible(true);
     }//GEN-LAST:event_btnregistrarMouseClicked
+
+    private void btningresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btningresarMouseClicked
+        ArrayList<Usuario> users = null;            // TODO add your handling code here:
+        ManejadorCliente mc = new ManejadorCliente();
+        try {
+            users = mc.obtenerUsuarios();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (Usuario user : users) {
+            System.out.println(user.getUsuario()+"->"+user.getPass());
+        }
+        for (Usuario user : users) {
+            if (user.getUsuario().compareTo(txtusuario.getText())==0 && user.getPass().compareTo(txtcontrasena.getText())==0) {
+                JOptionPane.showMessageDialog(null, "Inicio de sesion exitoso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrectos!");
+                txtusuario.setText("");
+                txtcontrasena.setText("");
+            }
+        }
+
+    }//GEN-LAST:event_btningresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -180,7 +219,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtcontraseña;
+    private javax.swing.JTextField txtcontrasena;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
 }

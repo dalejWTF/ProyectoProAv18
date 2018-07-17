@@ -21,7 +21,7 @@ import javax.swing.DefaultComboBoxModel;
  * @author Usuario
  */
 public class frmAdmin extends javax.swing.JFrame {
-
+    Usuario user;
     /**
      * Creates new form frmCliente
      */
@@ -62,24 +62,25 @@ public class frmAdmin extends javax.swing.JFrame {
         }
         return j;
     }
-    public void seleccionarGenero(int index){
-        if (index==1) {
+
+    public void seleccionarGenero(int index) {
+        if (index == 1) {
             rdbMasculino.setSelected(true);
-        }else if(index==2){
+        } else if (index == 2) {
             rdbMasculino.setSelected(true);
         }
-        
+
     }
-    
-    public void seleccionarTipo(int index){
-        if (index==1) {
+
+    public void seleccionarTipo(int index) {
+        if (index == 1) {
             rdbCliente.setSelected(true);
-        }else if(index==2){
+        } else if (index == 2) {
             rdbProveedor.setSelected(true);
         }
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,7 +109,7 @@ public class frmAdmin extends javax.swing.JFrame {
         txtNombres = new javax.swing.JTextField();
         txtApellidos = new javax.swing.JTextField();
         txtNumCelular = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jdcFechaNacimiento = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         rdbFemenino = new javax.swing.JRadioButton();
         rdbMasculino = new javax.swing.JRadioButton();
@@ -229,6 +230,11 @@ public class frmAdmin extends javax.swing.JFrame {
         btnGuardar.setText("Guardar");
 
         btnAtras.setText("Atras");
+        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseClicked(evt);
+            }
+        });
 
         btnBuscar.setText("Buscar");
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -322,7 +328,7 @@ public class frmAdmin extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNumCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                                 .addComponent(txtApellidos, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtNombres, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtCedula, javax.swing.GroupLayout.Alignment.LEADING)))
@@ -356,7 +362,7 @@ public class frmAdmin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNumCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -399,14 +405,15 @@ public class frmAdmin extends javax.swing.JFrame {
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         // TODO add your handling code here:
         ManejadorCliente manejadorCliente = new ManejadorCliente();
-        Usuario user = new Usuario();
+        user = new Usuario();
         try {
             user = manejadorCliente.getCliente(txtCedula.getText());
             txtCedula.setText(user.getCliente().getCedula());
             txtApellidos.setText(user.getCliente().getApellidos());
             txtNombres.setText(user.getCliente().getNombres());
+            jdcFechaNacimiento.setDate(user.getCliente().getFechaNacimiento());
             txtNumCelular.setText(user.getCliente().getNumTelefono());
-            int index=SeleccionPais(user.getCliente().getDireccionEnvio().getId_pais());
+            int index = SeleccionPais(user.getCliente().getDireccionEnvio().getId_pais());
             cbmPais.setSelectedIndex(index);
             txtCiudad.setText(user.getCliente().getDireccionEnvio().getCiudad());
             txtDireccion.setText(user.getCliente().getDireccionEnvio().getCallesRes());
@@ -419,6 +426,11 @@ public class frmAdmin extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnBuscarMouseClicked
+
+    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_btnAtrasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -466,7 +478,6 @@ public class frmAdmin extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbmPais;
     private javax.swing.ButtonGroup grupoGenero;
     private javax.swing.ButtonGroup grupoTipo;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -480,6 +491,7 @@ public class frmAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private com.toedter.calendar.JDateChooser jdcFechaNacimiento;
     private javax.swing.JLabel lblCiudad;
     private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblPais;

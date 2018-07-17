@@ -58,5 +58,29 @@ public class ManejadorCliente {
 
         return paises;
     }
-
+    
+    public ArrayList<Usuario> obtenerUsuarios() throws ClassNotFoundException, SQLException{
+        ArrayList<Usuario> users= new ArrayList<>();
+        DATCliente datc= new DATCliente();
+        ResultSet rs= datc.getUsrPss();
+        while (rs.next()) {
+            Usuario u= new Usuario();
+            u.setUsuario(rs.getString("usuario"));
+            u.setPass(rs.getString("contrasena"));
+            users.add(u);
+            
+        }
+        return users;
+    }
+    
+    public int getIdDir() throws ClassNotFoundException, SQLException{
+        int index=0;
+        DATCliente datc= new DATCliente();
+        ResultSet rs=null;
+        rs= datc.getIdDir();
+        if (rs.next()) {
+            index=rs.getInt("COUNT(*)");
+        }
+        return index;
+    }
 }

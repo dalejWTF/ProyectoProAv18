@@ -68,7 +68,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtNumCelular" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jDateChooser1" alignment="0" pref="165" max="32767" attributes="0"/>
+                                  <Component id="jdcFechaNacimiento" alignment="0" pref="165" max="32767" attributes="0"/>
                                   <Component id="txtApellidos" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtNombres" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtCedula" alignment="0" max="32767" attributes="0"/>
@@ -112,7 +112,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jdcFechaNacimiento" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -262,7 +262,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumCelular">
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+        <Component class="com.toedter.calendar.JDateChooser" name="jdcFechaNacimiento">
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Properties>
@@ -382,6 +382,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atras"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAtrasMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="btnBuscar">
               <Properties>

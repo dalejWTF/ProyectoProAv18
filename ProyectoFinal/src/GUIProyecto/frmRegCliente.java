@@ -17,12 +17,12 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author Usuario
  */
-public class frmCliente extends javax.swing.JFrame {
+public class frmRegCliente extends javax.swing.JFrame {
 
     /**
      * Creates new form frmCliente
      */
-    public frmCliente() {
+    public frmRegCliente() {
         this.setTitle("Registro Usuario");
         initComponents();
         EnlistarPaises();
@@ -36,9 +36,9 @@ public class frmCliente extends javax.swing.JFrame {
             paises=manejadorCliente.ObtenerPaises();
             
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(frmCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(frmCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
         for (Pais p : paises) {
@@ -196,6 +196,11 @@ public class frmCliente extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseClicked(evt);
+            }
+        });
 
         btnAtras.setText("Atras");
 
@@ -350,6 +355,11 @@ public class frmCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCedulaActionPerformed
 
+    private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnGuardarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -367,21 +377,23 @@ public class frmCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmCliente().setVisible(true);
+                new frmRegCliente().setVisible(true);
             }
         });
     }
