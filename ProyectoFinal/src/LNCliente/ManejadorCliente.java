@@ -7,7 +7,9 @@ package LNCliente;
 
 import Clases.Cliente;
 import Clases.Direccion;
+import Clases.Pais;
 import DATCliente.DATCliente;
+import java.util.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,4 +36,17 @@ public class ManejadorCliente {
         }
         return c;
     }
+    
+    public ArrayList <Pais> ObtenerPaises() throws ClassNotFoundException, SQLException{
+        ArrayList<Pais>paises= new ArrayList<>();
+        DATCliente dATCliente= new DATCliente();
+        ResultSet rs= dATCliente.ObtenerPais();
+        while (rs.next()) {            
+            Pais pais= new Pais(rs.getInt(1),rs.getString(2));
+            paises.add(pais);
+        }
+        
+        return paises;
+    }
+   
 }
