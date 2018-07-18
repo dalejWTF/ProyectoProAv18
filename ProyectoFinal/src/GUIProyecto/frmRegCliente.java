@@ -14,7 +14,10 @@ import LNCliente.ManejadorCliente;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,7 +33,6 @@ public class frmRegCliente extends javax.swing.JFrame {
         initComponents();
         EnlistarPaises();
 
-      
     }
 
     public void EnlistarPaises() {
@@ -69,6 +71,20 @@ public class frmRegCliente extends javax.swing.JFrame {
         return i;
     }
 
+    public boolean ValidarCorreo(String email){
+        // Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mather = pattern.matcher(email);
+ 
+        if (mather.find() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -447,7 +463,8 @@ public class frmRegCliente extends javax.swing.JFrame {
         Usuario nuevoUsr = new Usuario();
         Cliente clienteUsr = new Cliente();
         Direccion dirUsr = new Direccion();
-
+        ManejadorCliente manejadorCliente= new ManejadorCliente();
+        
         clienteUsr.setCedula(txtCedula.getText());
         clienteUsr.setApellidos(txtApellidos.getText());
         clienteUsr.setNombres(txtNombres.getText());
@@ -459,7 +476,33 @@ public class frmRegCliente extends javax.swing.JFrame {
         dirUsr.setId_pais(idPais);
         dirUsr.setCiudad(txtCiudad.getText());
         dirUsr.setCallesRes(txtDireccion.getText());
-        System.out.println();
+        
+        String s1 = String.copyValueOf(jpssContrasena.getPassword());
+        String s2 = String.copyValueOf(jpssVerificarContrasena.getPassword());
+        if (ValidarCorreo(txtCorreo.getText())) {
+            nuevoUsr.setUsuario(txtCorreo.getText());
+        }else
+            JOptionPane.showMessageDialog(null, "Correo Invalido");
+        
+        if (s1.compareTo(s2)==0) {
+            JOptionPane.showMessageDialog(null, "Contraseñas correctas");
+            String s = String.valueOf(jpssContrasena.getPassword());
+        } else {
+            JOptionPane.showMessageDialog(null, "Contraseñas Incorrectas");
+        }
+           
+           int id;
+           int idDir;
+        try {
+            id = manejadorCliente.getIdCliente();
+            idDir=manejadorCliente.getIdDir();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
 
     }//GEN-LAST:event_btnGuardarMouseClicked
 
@@ -469,7 +512,7 @@ public class frmRegCliente extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**

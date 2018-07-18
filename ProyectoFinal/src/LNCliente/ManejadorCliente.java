@@ -83,4 +83,15 @@ public class ManejadorCliente {
         }
         return index;
     }
+    
+    public int getIdCliente() throws ClassNotFoundException, SQLException{
+        int index=0;
+        DATCliente datc= new DATCliente();
+        ResultSet rs=null;
+        rs= datc.getIdCliente();
+        if (rs.next()) {
+            index=rs.getInt("COUNT(*)");
+        }
+        return index;
+    }
 }

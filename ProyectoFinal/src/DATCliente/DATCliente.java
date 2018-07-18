@@ -72,4 +72,10 @@ public class DATCliente {
         String sql="SELECT COUNT(*) FROM direccion";
         return s.executeQuery(sql);
     }
+    public ResultSet getIdCliente() throws ClassNotFoundException, SQLException{
+        Statement s;
+        s= conect.getConnection().createStatement();
+        String sql="SELECT COUNT(*) FROM cliente";
+        return s.executeQuery(sql);
+    }
 }
