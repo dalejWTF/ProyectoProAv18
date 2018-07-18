@@ -126,23 +126,35 @@ public class frmAdmin extends javax.swing.JFrame {
         rdbProveedor = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 51, 51));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Cedula");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Nombres");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Apellidos");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Fecha Nacimiento");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Numero Celular");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Direccion")));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        lblPais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPais.setText("Pais");
 
+        lblDireccion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblDireccion.setText("Direccion");
 
+        lblCiudad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCiudad.setText("Ciudad");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -187,14 +199,17 @@ public class frmAdmin extends javax.swing.JFrame {
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         grupoGenero.add(rdbFemenino);
+        rdbFemenino.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         rdbFemenino.setText("Femenino");
 
         grupoGenero.add(rdbMasculino);
+        rdbMasculino.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         rdbMasculino.setText("Maculino");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel5.setText("Genero");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -203,15 +218,14 @@ public class frmAdmin extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(166, 166, 166))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(rdbFemenino)
-                        .addGap(18, 18, 18)
-                        .addComponent(rdbMasculino)
-                        .addGap(24, 24, 24))))
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(166, 166, 166))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(rdbFemenino)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rdbMasculino)
+                .addGap(24, 24, 24))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,23 +241,31 @@ public class frmAdmin extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        btnAtras.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAtras.setText("Atras");
+        btnAtras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAtrasMouseClicked(evt);
             }
         });
 
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBuscarMouseClicked(evt);
             }
         });
 
+        btnEditar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -272,14 +294,17 @@ public class frmAdmin extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel7.setText("Tipo de Usuario");
 
         grupoTipo.add(rdbCliente);
+        rdbCliente.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         rdbCliente.setText("Cliente");
 
         grupoTipo.add(rdbProveedor);
+        rdbProveedor.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         rdbProveedor.setText("Proveedor");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
