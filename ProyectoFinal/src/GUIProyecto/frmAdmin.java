@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -464,16 +465,25 @@ public class frmAdmin extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        frmPrincipal princ= new frmPrincipal();
-        if (txtApellidos.getText().length()==0 
-                || txtCedula.getText().length()==0
-                || txtCiudad.getText().length()==0
-                || txtDireccion.getText().length()==0
-                || txtNombres. getText().length()==0
-                || txtNumCelular.getText().length()==0) {
-            
-        }else{
+      frmPrincipal princ= new frmPrincipal();
+        if (txtCedula.getText().length()==0 
+                && txtNombres.getText().length()==0 
+                && txtApellidos.getText().length()==0
+                && jdcFechaNacimiento.getDate()==null
+                &&txtNumCelular.getText().length()==0
+                && cbmPais.getSelectedIndex()>0
+                && txtCiudad.getText().length()==0
+                && txtDireccion.getText().length()==0
+               ) {
             princ.setVisible(true);
+        }else{
+            int result = JOptionPane.showConfirmDialog(null,
+                    "¿HAY CAMPOS LLENOS ESTA SEGURO "
+                    + "\n QUE QUIERE SALIR?",
+                    "Confirm Quit", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                princ.setVisible(true);
+            }
         }
      
             
