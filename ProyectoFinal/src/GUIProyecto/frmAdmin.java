@@ -100,7 +100,7 @@ public class frmAdmin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblPais = new javax.swing.JLabel();
-        cbmPais = new javax.swing.JComboBox<>();
+        cbmPais = new javax.swing.JComboBox<String>();
         lblDireccion = new javax.swing.JLabel();
         lblCiudad = new javax.swing.JLabel();
         txtCiudad = new javax.swing.JTextField();
@@ -251,6 +251,11 @@ public class frmAdmin extends javax.swing.JFrame {
         btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAtrasMouseClicked(evt);
+            }
+        });
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
             }
         });
 
@@ -456,6 +461,23 @@ public class frmAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_btnAtrasMouseClicked
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
+        frmPrincipal princ= new frmPrincipal();
+        if (txtApellidos.getText().length()==0 
+                || txtCedula.getText().length()==0
+                || txtCiudad.getText().length()==0
+                || txtDireccion.getText().length()==0
+                || txtNombres. getText().length()==0
+                || txtNumCelular.getText().length()==0) {
+            
+        }else{
+            princ.setVisible(true);
+        }
+     
+            
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**
      * @param args the command line arguments

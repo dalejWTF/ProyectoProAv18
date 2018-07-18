@@ -29,15 +29,17 @@ public class frmRegCliente extends javax.swing.JFrame {
         this.setTitle("Registro Usuario");
         initComponents();
         EnlistarPaises();
+
+      
     }
-    
-    public void EnlistarPaises(){
-        
-        ManejadorCliente manejadorCliente= new ManejadorCliente();
-        ArrayList<Pais> paises= new ArrayList<>();
-        try {           
-            paises=manejadorCliente.ObtenerPaises();
-            
+
+    public void EnlistarPaises() {
+
+        ManejadorCliente manejadorCliente = new ManejadorCliente();
+        ArrayList<Pais> paises = new ArrayList<>();
+        try {
+            paises = manejadorCliente.ObtenerPaises();
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -48,22 +50,22 @@ public class frmRegCliente extends javax.swing.JFrame {
             dcbm.addElement(p);
         }
         cmbPais.setModel(dcbm);
-        
+
     }
-    
-    public int getIdGenero(){
-        int i=0;
+
+    public int getIdGenero() {
+        int i = 0;
         if (rdbMasculino.isSelected()) {
-            i=1;
+            i = 1;
         }
         if (rdbFemenino.isSelected()) {
-            i=2;
+            i = 2;
         }
         return i;
     }
-   
-    public int getIdPais(){
-        int i= cmbPais.getSelectedIndex();
+
+    public int getIdPais() {
+        int i = cmbPais.getSelectedIndex();
         return i;
     }
 
@@ -86,7 +88,7 @@ public class frmRegCliente extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblPais = new javax.swing.JLabel();
-        cmbPais = new javax.swing.JComboBox<>();
+        cmbPais = new javax.swing.JComboBox<String>();
         lblDireccion = new javax.swing.JLabel();
         lblCiudad = new javax.swing.JLabel();
         txtCiudad = new javax.swing.JTextField();
@@ -238,6 +240,11 @@ public class frmRegCliente extends javax.swing.JFrame {
         btnAtras.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAtras.setText("Atras");
         btnAtras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -437,28 +444,33 @@ public class frmRegCliente extends javax.swing.JFrame {
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
         // TODO add your handling code here:
-        Usuario nuevoUsr= new Usuario();
-        Cliente clienteUsr=new Cliente();
-        Direccion dirUsr= new Direccion();
-        
+        Usuario nuevoUsr = new Usuario();
+        Cliente clienteUsr = new Cliente();
+        Direccion dirUsr = new Direccion();
+
         clienteUsr.setCedula(txtCedula.getText());
         clienteUsr.setApellidos(txtApellidos.getText());
         clienteUsr.setNombres(txtNombres.getText());
         clienteUsr.setFechaNacimiento(new java.sql.Date(jdcFechaNacimiento.getDate().getTime()));
         clienteUsr.setNumTelefono(txtNumCelular.getText());
-        int genero=getIdGenero();
+        int genero = getIdGenero();
         clienteUsr.setGenero(genero);
-        int idPais=getIdPais();
+        int idPais = getIdPais();
         dirUsr.setId_pais(idPais);
         dirUsr.setCiudad(txtCiudad.getText());
         dirUsr.setCallesRes(txtDireccion.getText());
         System.out.println();
-        
+
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -497,7 +509,6 @@ public class frmRegCliente extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAtras;
     private javax.swing.JToggleButton btnGuardar;
