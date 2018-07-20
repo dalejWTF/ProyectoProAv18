@@ -35,31 +35,27 @@ public class frmRegCliente extends javax.swing.JFrame {
         ValidarCampos();
 
     }
-    
-    public boolean ValidarCampos(){
+
+    public boolean ValidarCampos() {
         ManejadorCliente manjCliente = new ManejadorCliente();
         //String numero = txtCedula.getText();
         //String num = String.valueOf(manjCliente.obtenerUsuarios().toString());
-       // System.out.println(num);
+        // System.out.println(num);
         boolean valido = true;
         if (txtCedula.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese la Cédula");
             valido = false;
-            
+
         } else if (txtNombres.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese los Nombres");
             valido = false;
-        }
-        else if (txtApellidos.getText().equals("")) {
+        } else if (txtApellidos.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese los Apellidos");
-        }
-        else if (jdcFechaNacimiento.getDate().equals("")) {
+        } else if (jdcFechaNacimiento.getDate().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese la fecha de Nacimiento");
-        }
-        else if (txtNumCelular.getText().equals("")) {
+        } else if (txtNumCelular.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese el Numero de celular");
-        }
-        else if (cmbPais.getSelectedIndex() == 0) {
+        } else if (cmbPais.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Elija el País");
             valido = false;
         } else if (txtCorreo.getText().equals("")) {
@@ -104,7 +100,6 @@ public class frmRegCliente extends javax.swing.JFrame {
 
     }
 
-
     public int getIdGenero() {
         int i = 0;
         if (rdbMasculino.isSelected()) {
@@ -115,14 +110,14 @@ public class frmRegCliente extends javax.swing.JFrame {
         }
         return i;
     }
-    
-    public int getIdTipo(){
-        int i=0;
+
+    public int getIdTipo() {
+        int i = 0;
         if (rdbCliente.isSelected()) {
-            i=1;
+            i = 1;
         }
         if (rdbProveedor.isSelected()) {
-            i=2;
+            i = 2;
         }
         return i;
     }
@@ -542,34 +537,36 @@ public class frmRegCliente extends javax.swing.JFrame {
 
             String s1 = String.copyValueOf(jpssContrasena.getPassword());
             String s2 = String.copyValueOf(jpssVerificarContrasena.getPassword());
-            if (ValidarCorreo(txtCorreo.getText())) {
-                nuevoUsr.setUsuario(txtCorreo.getText());
-                if (s1.compareTo(s2) == 0) {
-                    String s = String.valueOf(jpssContrasena.getPassword());
-                    int id_tipo=getIdTipo();
-                    int id = manejadorCliente.getIdCliente();
-                    int idDir = manejadorCliente.getIdDir();
-                    clienteUsr.setId(id);
-                    dirUsr.setId_direccion(idDir);
-                    clienteUsr.setDireccionEnvio(dirUsr);
-                    nuevoUsr.setId_tipo(id_tipo);
-                    nuevoUsr.setCliente(clienteUsr);
-                    nuevoUsr.setPass(s1);
-                    if (manejadorCliente.AgregarDireccion(nuevoUsr.getCliente().getDireccionEnvio())) {
-                        if (manejadorCliente.AgregarCliente(nuevoUsr.getCliente())) {
-                            if (manejadorCliente.AgregarUsuario(nuevoUsr)) {
+            if (ValidarCampos()) {
+                if (ValidarCorreo(txtCorreo.getText())) {
+                    nuevoUsr.setUsuario(txtCorreo.getText());
+                    if (s1.compareTo(s2) == 0) {
+                        String s = String.valueOf(jpssContrasena.getPassword());
+                        int id_tipo = getIdTipo();
+                        int id = manejadorCliente.getIdCliente();
+                        int idDir = manejadorCliente.getIdDir();
+                        clienteUsr.setId(id);
+                        dirUsr.setId_direccion(idDir);
+                        clienteUsr.setDireccionEnvio(dirUsr);
+                        nuevoUsr.setId_tipo(id_tipo);
+                        nuevoUsr.setCliente(clienteUsr);
+                        nuevoUsr.setPass(s1);
+                        if (manejadorCliente.AgregarDireccion(nuevoUsr.getCliente().getDireccionEnvio())) {
+                            if (manejadorCliente.AgregarCliente(nuevoUsr.getCliente())) {
+                                if (manejadorCliente.AgregarUsuario(nuevoUsr)) {
+                                }
                             }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se pudo agregar cliente");
                         }
+
                     } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo agregar cliente");
+                        JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+                    JOptionPane.showMessageDialog(null, "Correo Invalido");
                 }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Correo Invalido");
             }
 
         } catch (ClassNotFoundException ex) {
