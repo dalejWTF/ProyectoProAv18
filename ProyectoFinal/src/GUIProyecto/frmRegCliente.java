@@ -32,7 +32,6 @@ public class frmRegCliente extends javax.swing.JFrame {
         this.setTitle("Registro Usuario");
         initComponents();
         EnlistarPaises();
-        ValidarCampos();
 
     }
 
@@ -40,7 +39,11 @@ public class frmRegCliente extends javax.swing.JFrame {
         ManejadorCliente manjCliente = new ManejadorCliente();
         //String numero = txtCedula.getText();
         //String num = String.valueOf(manjCliente.obtenerUsuarios().toString());
+<<<<<<< HEAD
+        //System.out.println(num);
+=======
         // System.out.println(num);
+>>>>>>> 6936d63608c84257125da24af959a72494f7c0a9
         boolean valido = true;
         if (txtCedula.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese la Cédula");
@@ -70,10 +73,10 @@ public class frmRegCliente extends javax.swing.JFrame {
             valido = false;
 
         } else if (!rdbFemenino.isSelected() && !rdbMasculino.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Seleccione un estado");
+            JOptionPane.showMessageDialog(null, "Seleccione el Género");
             valido = false;
         } else if (!rdbCliente.isSelected() && !rdbProveedor.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Seleccione un estado");
+            JOptionPane.showMessageDialog(null, "Seleccione un el Tipo de Usuario");
             valido = false;
         }
         return valido;
@@ -522,6 +525,50 @@ public class frmRegCliente extends javax.swing.JFrame {
         ManejadorCliente manejadorCliente = new ManejadorCliente();
 
         try {
+<<<<<<< HEAD
+            if (ValidarCampos()) {
+                clienteUsr.setCedula(txtCedula.getText());
+                clienteUsr.setApellidos(txtApellidos.getText());
+                clienteUsr.setNombres(txtNombres.getText());
+                clienteUsr.setFechaNacimiento(new java.sql.Date(jdcFechaNacimiento.getDate().getTime()));
+                clienteUsr.setNumTelefono(txtNumCelular.getText());
+                int genero = getIdGenero();
+                clienteUsr.setGenero(genero);
+
+                int idPais = getIdPais();
+                dirUsr.setId_pais(idPais);
+                dirUsr.setCiudad(txtCiudad.getText());
+                dirUsr.setCallesRes(txtDireccion.getText());
+
+                String s1 = String.copyValueOf(jpssContrasena.getPassword());
+                String s2 = String.copyValueOf(jpssVerificarContrasena.getPassword());
+                if (ValidarCorreo(txtCorreo.getText())) {
+                    nuevoUsr.setUsuario(txtCorreo.getText());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Correo Invalido");
+                }
+
+                if (s1.compareTo(s2) == 0) {
+
+                    String s = String.valueOf(jpssContrasena.getPassword());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+                }
+
+                int id;
+                int idDir;
+                id = manejadorCliente.getIdCliente();
+                idDir = manejadorCliente.getIdDir();
+                clienteUsr.setId(id);
+                dirUsr.setId_direccion(idDir);
+                clienteUsr.setDireccionEnvio(dirUsr);
+                nuevoUsr.setCliente(clienteUsr);
+                manejadorCliente.AgregarCliente(nuevoUsr.getCliente());
+                manejadorCliente.AgregarUsuario(nuevoUsr);
+
+            }
+
+=======
             clienteUsr.setCedula(txtCedula.getText());
             clienteUsr.setApellidos(txtApellidos.getText());
             clienteUsr.setNombres(txtNombres.getText());
@@ -569,12 +616,12 @@ public class frmRegCliente extends javax.swing.JFrame {
                 }
             }
 
+>>>>>>> 6936d63608c84257125da24af959a72494f7c0a9
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-
 
     }//GEN-LAST:event_btnGuardarMouseClicked
 
