@@ -38,12 +38,6 @@ public class frmRegCliente extends javax.swing.JFrame {
     public boolean ValidarCampos() {
         ManejadorCliente manjCliente = new ManejadorCliente();
         //String numero = txtCedula.getText();
-        //String num = String.valueOf(manjCliente.obtenerUsuarios().toString());
-<<<<<<< HEAD
-        //System.out.println(num);
-=======
-        // System.out.println(num);
->>>>>>> 6936d63608c84257125da24af959a72494f7c0a9
         boolean valido = true;
         if (txtCedula.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese la Cédula");
@@ -525,7 +519,7 @@ public class frmRegCliente extends javax.swing.JFrame {
         ManejadorCliente manejadorCliente = new ManejadorCliente();
 
         try {
-<<<<<<< HEAD
+
             if (ValidarCampos()) {
                 clienteUsr.setCedula(txtCedula.getText());
                 clienteUsr.setApellidos(txtApellidos.getText());
@@ -568,7 +562,7 @@ public class frmRegCliente extends javax.swing.JFrame {
 
             }
 
-=======
+
             clienteUsr.setCedula(txtCedula.getText());
             clienteUsr.setApellidos(txtApellidos.getText());
             clienteUsr.setNombres(txtNombres.getText());
@@ -616,7 +610,7 @@ public class frmRegCliente extends javax.swing.JFrame {
                 }
             }
 
->>>>>>> 6936d63608c84257125da24af959a72494f7c0a9
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
