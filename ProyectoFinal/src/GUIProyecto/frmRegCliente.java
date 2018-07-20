@@ -32,6 +32,55 @@ public class frmRegCliente extends javax.swing.JFrame {
         this.setTitle("Registro Usuario");
         initComponents();
         EnlistarPaises();
+        ValidarCampos();
+
+    }
+    
+    public boolean ValidarCampos(){
+        ManejadorCliente manjCliente = new ManejadorCliente();
+        //String numero = txtCedula.getText();
+        //String num = String.valueOf(manjCliente.obtenerUsuarios().toString());
+       // System.out.println(num);
+        boolean valido = true;
+        if (txtCedula.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese la Cédula");
+            valido = false;
+            
+        } else if (txtNombres.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese los Nombres");
+            valido = false;
+        }
+        else if (txtApellidos.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese los Apellidos");
+        }
+        else if (jdcFechaNacimiento.getDate().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese la fecha de Nacimiento");
+        }
+        else if (txtNumCelular.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese el Numero de celular");
+        }
+        else if (cmbPais.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Elija el País");
+            valido = false;
+        } else if (txtCorreo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese el Correo");
+            valido = false;
+        } else if (jpssContrasena.getPassword().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese la contraseña");
+            valido = false;
+
+        } else if (jpssVerificarContrasena.getPassword().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese la contraseña");
+            valido = false;
+
+        } else if (!rdbFemenino.isSelected() && !rdbMasculino.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Seleccione un estado");
+            valido = false;
+        } else if (!rdbCliente.isSelected() && !rdbProveedor.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Seleccione un estado");
+            valido = false;
+        }
+        return valido;
 
     }
 
@@ -54,6 +103,7 @@ public class frmRegCliente extends javax.swing.JFrame {
         cmbPais.setModel(dcbm);
 
     }
+
 
     public int getIdGenero() {
         int i = 0;
