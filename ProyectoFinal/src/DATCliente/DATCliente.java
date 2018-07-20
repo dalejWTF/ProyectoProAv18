@@ -44,7 +44,7 @@ public class DATCliente {
     public ResultSet ObtenerPais() throws ClassNotFoundException, SQLException {
         Statement s = conect.getConnection().createStatement();
         String sql = "SELECT * FROM pais";
-        return s.executeQuery(sql);
+        return s.executeQuery(sql); 
 
     }
 
