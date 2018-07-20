@@ -33,7 +33,7 @@ public class DATCliente {
     //Devuelve un cliente que ha sido buscado
     public ResultSet getCliente(String cedula) throws ClassNotFoundException, SQLException {
         Statement ps = null;
-        String sql = "SELECT c.cedula, c.apellidos, c.nombres, c.fechaNacimiento, c.numTelefono, p.id pais,d.ciudad, d.calles, g.id genero, u.usuario, u.contrasena, t.id tipo FROM cliente c, pais p, direccion d, genero g, tipo t,usuario u WHERE c.direccion=d.id AND d.id_pais=p.id AND g.id=c.genero AND t.id= u.id_tipo AND c.cedula=" + cedula;
+        String sql = "SELECT c.cedula, c.apellidos, c.nombres, c.fechaNacimiento, c.numTelefono, p.id pais,d.ciudad, d.calles, g.id genero, u.usuario, u.contrasena, t.id tipo FROM cliente c, pais p, direccion d, genero g, tipo t,usuario u WHERE c.direccion=d.id AND d.id_pais=p.id AND g.id=c.genero AND t.id= u.id_tipo AND c.id= u.id_cliente AND c.cedula="+cedula;
         ps = conect.getConnection().createStatement();
 
         return ps.executeQuery(sql);
@@ -49,18 +49,26 @@ public class DATCliente {
     }
 
     //Metodos Para obtener el ultimo Id de las tablas para enlazar al momento de agregar
-    public ResultSet getIdDir() throws ClassNotFoundException, SQLException {
+    public ResultSet IdDireccionAgregada() throws ClassNotFoundException, SQLException {
         Statement s;
         s = conect.getConnection().createStatement();
         String sql = "SELECT COUNT(*) FROM direccion";
         return s.executeQuery(sql);
     }
 
-    public ResultSet getIdCliente() throws ClassNotFoundException, SQLException {
+    public ResultSet IdClienteAgregado() throws ClassNotFoundException, SQLException {
         Statement s;
         s = conect.getConnection().createStatement();
         String sql = "SELECT COUNT(*) FROM cliente";
         return s.executeQuery(sql);
+    }
+    
+    public ResultSet getIdCliente(String cedula) throws ClassNotFoundException, SQLException{
+        Statement s=null;
+        String sql="SELECT c.id FROM cliente c WHERE c.cedula="+cedula;
+        s= conect.getConnection().createStatement();
+        return s.executeQuery(sql);
+        
     }
 
     //Fin metodos GET

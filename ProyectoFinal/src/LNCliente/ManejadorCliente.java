@@ -77,7 +77,7 @@ public class ManejadorCliente {
         int index=0;
         DATCliente datc= new DATCliente();
         ResultSet rs=null;
-        rs= datc.getIdDir();
+        rs= datc.IdDireccionAgregada();
         if (rs.next()) {
             index=rs.getInt("COUNT(*)");
         }
@@ -88,7 +88,7 @@ public class ManejadorCliente {
         int index=0;
         DATCliente datc= new DATCliente();
         ResultSet rs=null;
-        rs= datc.getIdCliente();
+        rs= datc.IdClienteAgregado();
         if (rs.next()) {
             index=rs.getInt("COUNT(*)");
         }
