@@ -7,6 +7,7 @@ package DATCliente;
 
 import Clases.Cliente;
 import Clases.Direccion;
+import Clases.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,6 +63,17 @@ public class DATCliente {
         ps.setInt(5, cliente.getGenero());
         ps.setString(6, cliente.getNumTelefono());
         ps.setInt(7, cliente.getDireccionEnvio().getId_direccion());
+        return ps;
+    }
+    
+    public PreparedStatement addUsuario(Usuario usuario) throws ClassNotFoundException, SQLException{
+        PreparedStatement ps= null;
+        String sql="INSERT INTO usuario (id, id_cliente, id_tipo, usuario, contrasena) VALUES (NULL, ?, ?, ?, ?);";
+        ps= conect.getConnection().prepareStatement(sql);
+        ps.setInt(1, usuario.getCliente().getId());
+        ps.setInt(2, usuario.getId_tipo());
+        ps.setString(3, usuario.getUsuario());
+        ps.setString(4, usuario.getPass());
         return ps;
     }
     

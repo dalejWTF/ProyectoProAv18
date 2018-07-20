@@ -71,20 +71,20 @@ public class frmRegCliente extends javax.swing.JFrame {
         return i;
     }
 
-    public boolean ValidarCorreo(String email){
+    public boolean ValidarCorreo(String email) {
         // Patrón para validar el email
         Pattern pattern = Pattern
                 .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher mather = pattern.matcher(email);
- 
+
         if (mather.find() == true) {
             return true;
         } else {
             return false;
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -463,46 +463,54 @@ public class frmRegCliente extends javax.swing.JFrame {
         Usuario nuevoUsr = new Usuario();
         Cliente clienteUsr = new Cliente();
         Direccion dirUsr = new Direccion();
-        ManejadorCliente manejadorCliente= new ManejadorCliente();
-        
-        clienteUsr.setCedula(txtCedula.getText());
-        clienteUsr.setApellidos(txtApellidos.getText());
-        clienteUsr.setNombres(txtNombres.getText());
-        clienteUsr.setFechaNacimiento(new java.sql.Date(jdcFechaNacimiento.getDate().getTime()));
-        clienteUsr.setNumTelefono(txtNumCelular.getText());
-        int genero = getIdGenero();
-        clienteUsr.setGenero(genero);
-        int idPais = getIdPais();
-        dirUsr.setId_pais(idPais);
-        dirUsr.setCiudad(txtCiudad.getText());
-        dirUsr.setCallesRes(txtDireccion.getText());
-        
-        String s1 = String.copyValueOf(jpssContrasena.getPassword());
-        String s2 = String.copyValueOf(jpssVerificarContrasena.getPassword());
-        if (ValidarCorreo(txtCorreo.getText())) {
-            nuevoUsr.setUsuario(txtCorreo.getText());
-        }else
-            JOptionPane.showMessageDialog(null, "Correo Invalido");
-        
-        if (s1.compareTo(s2)==0) {
-            JOptionPane.showMessageDialog(null, "Contraseñas correctas");
-            String s = String.valueOf(jpssContrasena.getPassword());
-        } else {
-            JOptionPane.showMessageDialog(null, "Contraseñas Incorrectas");
-        }
-           
-           int id;
-           int idDir;
+        ManejadorCliente manejadorCliente = new ManejadorCliente();
+
         try {
+            clienteUsr.setCedula(txtCedula.getText());
+            clienteUsr.setApellidos(txtApellidos.getText());
+            clienteUsr.setNombres(txtNombres.getText());
+            clienteUsr.setFechaNacimiento(new java.sql.Date(jdcFechaNacimiento.getDate().getTime()));
+            clienteUsr.setNumTelefono(txtNumCelular.getText());
+            int genero = getIdGenero();
+            clienteUsr.setGenero(genero);
+
+            int idPais = getIdPais();
+            dirUsr.setId_pais(idPais);
+            dirUsr.setCiudad(txtCiudad.getText());
+            dirUsr.setCallesRes(txtDireccion.getText());
+
+            String s1 = String.copyValueOf(jpssContrasena.getPassword());
+            String s2 = String.copyValueOf(jpssVerificarContrasena.getPassword());
+            if (ValidarCorreo(txtCorreo.getText())) {
+                nuevoUsr.setUsuario(txtCorreo.getText());
+            } else {
+                JOptionPane.showMessageDialog(null, "Correo Invalido");
+            }
+
+            if (s1.compareTo(s2) == 0) {
+
+                String s = String.valueOf(jpssContrasena.getPassword());
+            } else {
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+            }
+
+            int id;
+            int idDir;
             id = manejadorCliente.getIdCliente();
-            idDir=manejadorCliente.getIdDir();
-            
+            idDir = manejadorCliente.getIdDir();
+            clienteUsr.setId(id);
+            dirUsr.setId_direccion(idDir);
+            clienteUsr.setDireccionEnvio(dirUsr);
+            nuevoUsr.setCliente(clienteUsr);
+            manejadorCliente.AgregarCliente(nuevoUsr.getCliente());
+            manejadorCliente.AgregarUsuario(nuevoUsr);
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
+
 
     }//GEN-LAST:event_btnGuardarMouseClicked
 

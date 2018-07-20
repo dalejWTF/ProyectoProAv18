@@ -94,4 +94,31 @@ public class ManejadorCliente {
         }
         return index;
     }
+    
+    public boolean  AgregarCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
+        DATCliente datc= new DATCliente();
+        PreparedStatement ps=null;
+        ps= datc.addCliente(cliente);
+        if (ps!=null) {
+            ps.execute();
+            return true;
+        }else
+            return false;
+        
+        
+    }
+    
+    public boolean AgregarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException{
+        DATCliente datc= new DATCliente();
+        PreparedStatement ps= null;
+        ps= datc.addUsuario(usuario);
+        if (ps!=null) {
+            ps.execute();
+            return true;
+        }else
+            return false;
+    }
+    
+    
+    
 }
