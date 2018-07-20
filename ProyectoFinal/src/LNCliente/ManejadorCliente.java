@@ -46,7 +46,7 @@ public class ManejadorCliente {
         }
         return u;
     }
-
+    
     public ArrayList<Pais> ObtenerPaises() throws ClassNotFoundException, SQLException {
         ArrayList<Pais> paises = new ArrayList<>();
         DATCliente dATCliente = new DATCliente();
@@ -119,6 +119,16 @@ public class ManejadorCliente {
             return false;
     }
     
-    
+    public boolean AgregarDireccion(Direccion direccion) throws ClassNotFoundException, SQLException{
+        DATCliente datc= new DATCliente();
+        PreparedStatement ps= null;
+        ps= datc.addDireccion(direccion);
+        if (ps!=null) {
+            ps.execute();
+            return true;
+        }else
+            return false;
+        
+    }
     
 }

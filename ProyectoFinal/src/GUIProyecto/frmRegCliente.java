@@ -39,7 +39,11 @@ public class frmRegCliente extends javax.swing.JFrame {
         ManejadorCliente manjCliente = new ManejadorCliente();
         //String numero = txtCedula.getText();
         //String num = String.valueOf(manjCliente.obtenerUsuarios().toString());
+<<<<<<< HEAD
         //System.out.println(num);
+=======
+        // System.out.println(num);
+>>>>>>> 6936d63608c84257125da24af959a72494f7c0a9
         boolean valido = true;
         if (txtCedula.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese la Cédula");
@@ -105,6 +109,17 @@ public class frmRegCliente extends javax.swing.JFrame {
             i = 1;
         }
         if (rdbFemenino.isSelected()) {
+            i = 2;
+        }
+        return i;
+    }
+
+    public int getIdTipo() {
+        int i = 0;
+        if (rdbCliente.isSelected()) {
+            i = 1;
+        }
+        if (rdbProveedor.isSelected()) {
             i = 2;
         }
         return i;
@@ -510,6 +525,7 @@ public class frmRegCliente extends javax.swing.JFrame {
         ManejadorCliente manejadorCliente = new ManejadorCliente();
 
         try {
+<<<<<<< HEAD
             if (ValidarCampos()) {
                 clienteUsr.setCedula(txtCedula.getText());
                 clienteUsr.setApellidos(txtApellidos.getText());
@@ -552,6 +568,55 @@ public class frmRegCliente extends javax.swing.JFrame {
 
             }
 
+=======
+            clienteUsr.setCedula(txtCedula.getText());
+            clienteUsr.setApellidos(txtApellidos.getText());
+            clienteUsr.setNombres(txtNombres.getText());
+            clienteUsr.setFechaNacimiento(new java.sql.Date(jdcFechaNacimiento.getDate().getTime()));
+            clienteUsr.setNumTelefono(txtNumCelular.getText());
+            int genero = getIdGenero();
+            clienteUsr.setGenero(genero);
+
+            int idPais = getIdPais();
+            dirUsr.setId_pais(idPais);
+            dirUsr.setCiudad(txtCiudad.getText());
+            dirUsr.setCallesRes(txtDireccion.getText());
+
+            String s1 = String.copyValueOf(jpssContrasena.getPassword());
+            String s2 = String.copyValueOf(jpssVerificarContrasena.getPassword());
+            if (ValidarCampos()) {
+                if (ValidarCorreo(txtCorreo.getText())) {
+                    nuevoUsr.setUsuario(txtCorreo.getText());
+                    if (s1.compareTo(s2) == 0) {
+                        String s = String.valueOf(jpssContrasena.getPassword());
+                        int id_tipo = getIdTipo();
+                        int id = manejadorCliente.getIdCliente();
+                        int idDir = manejadorCliente.getIdDir();
+                        clienteUsr.setId(id);
+                        dirUsr.setId_direccion(idDir);
+                        clienteUsr.setDireccionEnvio(dirUsr);
+                        nuevoUsr.setId_tipo(id_tipo);
+                        nuevoUsr.setCliente(clienteUsr);
+                        nuevoUsr.setPass(s1);
+                        if (manejadorCliente.AgregarDireccion(nuevoUsr.getCliente().getDireccionEnvio())) {
+                            if (manejadorCliente.AgregarCliente(nuevoUsr.getCliente())) {
+                                if (manejadorCliente.AgregarUsuario(nuevoUsr)) {
+                                }
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se pudo agregar cliente");
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Correo Invalido");
+                }
+            }
+
+>>>>>>> 6936d63608c84257125da24af959a72494f7c0a9
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
