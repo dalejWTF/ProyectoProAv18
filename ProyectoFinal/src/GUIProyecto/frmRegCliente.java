@@ -65,6 +65,17 @@ public class frmRegCliente extends javax.swing.JFrame {
         }
         return i;
     }
+    
+    public int getIdTipo(){
+        int i=0;
+        if (rdbCliente.isSelected()) {
+            i=1;
+        }
+        if (rdbProveedor.isSelected()) {
+            i=2;
+        }
+        return i;
+    }
 
     public int getIdPais() {
         int i = cmbPais.getSelectedIndex();
@@ -483,27 +494,33 @@ public class frmRegCliente extends javax.swing.JFrame {
             String s2 = String.copyValueOf(jpssVerificarContrasena.getPassword());
             if (ValidarCorreo(txtCorreo.getText())) {
                 nuevoUsr.setUsuario(txtCorreo.getText());
+                if (s1.compareTo(s2) == 0) {
+                    String s = String.valueOf(jpssContrasena.getPassword());
+                    int id_tipo=getIdTipo();
+                    int id = manejadorCliente.getIdCliente();
+                    int idDir = manejadorCliente.getIdDir();
+                    clienteUsr.setId(id);
+                    dirUsr.setId_direccion(idDir);
+                    clienteUsr.setDireccionEnvio(dirUsr);
+                    nuevoUsr.setId_tipo(id_tipo);
+                    nuevoUsr.setCliente(clienteUsr);
+                    nuevoUsr.setPass(s1);
+                    if (manejadorCliente.AgregarDireccion(nuevoUsr.getCliente().getDireccionEnvio())) {
+                        if (manejadorCliente.AgregarCliente(nuevoUsr.getCliente())) {
+                            if (manejadorCliente.AgregarUsuario(nuevoUsr)) {
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se pudo agregar cliente");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Correo Invalido");
             }
-
-            if (s1.compareTo(s2) == 0) {
-
-                String s = String.valueOf(jpssContrasena.getPassword());
-            } else {
-                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
-            }
-
-            int id;
-            int idDir;
-            id = manejadorCliente.getIdCliente();
-            idDir = manejadorCliente.getIdDir();
-            clienteUsr.setId(id);
-            dirUsr.setId_direccion(idDir);
-            clienteUsr.setDireccionEnvio(dirUsr);
-            nuevoUsr.setCliente(clienteUsr);
-            manejadorCliente.AgregarCliente(nuevoUsr.getCliente());
-            manejadorCliente.AgregarUsuario(nuevoUsr);
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
