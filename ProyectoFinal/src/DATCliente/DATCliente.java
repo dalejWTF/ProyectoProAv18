@@ -125,12 +125,22 @@ public class DATCliente {
         return ps;
     }
 
-    public PreparedStatement EditarUsuario() {
-
+    public PreparedStatement EditarUsuario() throws ClassNotFoundException, SQLException {
+PreparedStatement ps=null;
+String sql="UPDATE usuario SET id_cliente = ?, id_tipo = ?, usuario = ?, contrasena = ? WHERE usuario.id = ?;";
+        ps= conect.getConnection().prepareStatement(sql);
+        return ps;
     }
 
-    public PreparedStatement EditarDireccion() {
-
+    public PreparedStatement EditarDireccion(Direccion direccion) throws ClassNotFoundException, SQLException {
+        PreparedStatement ps=null;
+        String sql="UPDATE direccion SET id_pais = ?, calles = ?, ciudad = ? WHERE direccion.id = ?;";
+        ps= conect.getConnection().prepareStatement(sql);
+        ps.setInt(1, direccion.getId_pais());
+        ps.setString(2, direccion.getCallesRes());
+        ps.setString(3, direccion.getCiudad());
+        ps.setInt(4, direccion.getId_direccion());
+        return ps;
     }
     //Fin metodos Editar
 }
