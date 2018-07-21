@@ -73,24 +73,24 @@ public class ManejadorCliente {
         return users;
     }
     
-    public int getIdDir() throws ClassNotFoundException, SQLException{
+    public int getIdDirAgr() throws ClassNotFoundException, SQLException{
         int index=0;
         DATCliente datc= new DATCliente();
         ResultSet rs=null;
         rs= datc.IdDireccionAgregada();
         if (rs.next()) {
-            index=rs.getInt("COUNT(*)");
+            index=rs.getInt("id");
         }
         return index;
     }
     
-    public int getIdCliente() throws ClassNotFoundException, SQLException{
+    public int getIdClienteAgr() throws ClassNotFoundException, SQLException{
         int index=0;
         DATCliente datc= new DATCliente();
         ResultSet rs=null;
         rs= datc.IdClienteAgregado();
         if (rs.next()) {
-            index=rs.getInt("COUNT(*)");
+            index=rs.getInt("id");
         }
         return index;
     }
@@ -129,6 +129,82 @@ public class ManejadorCliente {
         }else
             return false;
         
+    }
+    
+    public int getIdUsr(String cedula) throws ClassNotFoundException, SQLException{
+        DATCliente datc= new DATCliente();
+        int i=0;
+        ResultSet rs= datc.getIdCliente(cedula);
+        if (rs.next()) {
+            i= rs.getInt("id");
+        }
+        return i;
+    }
+    
+    public boolean EditarCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
+        DATCliente datc= new DATCliente();
+        PreparedStatement ps= null;
+        ps= datc.EditarCliente(cliente);
+        if (ps!=null) {
+            ps.executeUpdate();
+            return true;
+        }else
+            return false;
+    }
+    
+    public boolean EditarDireccion(Direccion direccion) throws ClassNotFoundException, SQLException{
+        DATCliente datc= new DATCliente();
+        PreparedStatement ps= null;
+        ps= datc.EditarDireccion(direccion);
+        if (ps!=null) {
+            ps.executeUpdate();
+            return true;
+        }else
+            return false;
+    }
+    
+    public boolean EditarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException{
+        DATCliente datc= new DATCliente();
+        PreparedStatement ps=null;
+        ps= datc.EditarUsuario(usuario);
+        if (ps!=null) {
+            ps.executeUpdate();
+            return true;
+        }else
+            return false;
+    }
+    
+    public boolean EliminarCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
+        DATCliente datc= new DATCliente();
+        PreparedStatement ps= null;
+        ps= datc.EliminarCliente(cliente);
+        if (ps!=null) {
+            ps.executeUpdate();
+            return true;
+        }else
+            return false;
+    }
+    
+    public boolean EliminarDireccion(Direccion direccion) throws ClassNotFoundException, SQLException{
+        DATCliente datc= new DATCliente();
+        PreparedStatement ps= null;
+        ps= datc.EliminarDireccion(direccion);
+        if (ps!=null) {
+            ps.executeUpdate();
+            return true;
+        }else
+            return false;
+    }
+    
+    public boolean EliminarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException{
+        DATCliente datc= new DATCliente();
+        PreparedStatement ps= null;
+        ps= datc.EliminarUsuario(usuario);
+        if (ps!=null) {
+            ps.executeUpdate();
+            return true;
+        }else
+            return false;
     }
     
 }

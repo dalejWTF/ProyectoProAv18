@@ -35,6 +35,21 @@ public class frmRegCliente extends javax.swing.JFrame {
 
     }
 
+    public void Limpiar(){
+        txtApellidos.setText(null);
+        txtNombres.setText(null);
+        txtCedula.setText(null);
+        jdcFechaNacimiento.setDate(null);
+        txtNumCelular.setText(null);
+        txtCorreo.setText(null);
+        txtCiudad.setText(null);
+        txtDireccion.setText(null);
+        jpssContrasena.setText(null);
+        jpssVerificarContrasena.setText(null);
+        grupoTipo.clearSelection();
+        grupoGenero.clearSelection();
+    }
+    
     public boolean ValidarCampos() {
         ManejadorCliente manjCliente = new ManejadorCliente();
         //String numero = txtCedula.getText();
@@ -120,7 +135,7 @@ public class frmRegCliente extends javax.swing.JFrame {
     }
 
     public int getIdPais() {
-        int i = cmbPais.getSelectedIndex();
+        int i = cmbPais.getSelectedIndex()+1;
         return i;
     }
 
@@ -520,49 +535,6 @@ public class frmRegCliente extends javax.swing.JFrame {
 
         try {
 
-            if (ValidarCampos()) {
-                clienteUsr.setCedula(txtCedula.getText());
-                clienteUsr.setApellidos(txtApellidos.getText());
-                clienteUsr.setNombres(txtNombres.getText());
-                clienteUsr.setFechaNacimiento(new java.sql.Date(jdcFechaNacimiento.getDate().getTime()));
-                clienteUsr.setNumTelefono(txtNumCelular.getText());
-                int genero = getIdGenero();
-                clienteUsr.setGenero(genero);
-
-                int idPais = getIdPais();
-                dirUsr.setId_pais(idPais);
-                dirUsr.setCiudad(txtCiudad.getText());
-                dirUsr.setCallesRes(txtDireccion.getText());
-
-                String s1 = String.copyValueOf(jpssContrasena.getPassword());
-                String s2 = String.copyValueOf(jpssVerificarContrasena.getPassword());
-                if (ValidarCorreo(txtCorreo.getText())) {
-                    nuevoUsr.setUsuario(txtCorreo.getText());
-                } else {
-                    JOptionPane.showMessageDialog(null, "Correo Invalido");
-                }
-
-                if (s1.compareTo(s2) == 0) {
-
-                    String s = String.valueOf(jpssContrasena.getPassword());
-                } else {
-                    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
-                }
-
-                int id;
-                int idDir;
-                id = manejadorCliente.getIdCliente();
-                idDir = manejadorCliente.getIdDir();
-                clienteUsr.setId(id);
-                dirUsr.setId_direccion(idDir);
-                clienteUsr.setDireccionEnvio(dirUsr);
-                nuevoUsr.setCliente(clienteUsr);
-                manejadorCliente.AgregarCliente(nuevoUsr.getCliente());
-                manejadorCliente.AgregarUsuario(nuevoUsr);
-
-            }
-
-
             clienteUsr.setCedula(txtCedula.getText());
             clienteUsr.setApellidos(txtApellidos.getText());
             clienteUsr.setNombres(txtNombres.getText());
@@ -584,8 +556,8 @@ public class frmRegCliente extends javax.swing.JFrame {
                     if (s1.compareTo(s2) == 0) {
                         String s = String.valueOf(jpssContrasena.getPassword());
                         int id_tipo = getIdTipo();
-                        int id = manejadorCliente.getIdCliente();
-                        int idDir = manejadorCliente.getIdDir();
+                        int id = manejadorCliente.getIdClienteAgr()+1;
+                        int idDir = manejadorCliente.getIdDirAgr()+1;
                         clienteUsr.setId(id);
                         dirUsr.setId_direccion(idDir);
                         clienteUsr.setDireccionEnvio(dirUsr);
@@ -595,6 +567,8 @@ public class frmRegCliente extends javax.swing.JFrame {
                         if (manejadorCliente.AgregarDireccion(nuevoUsr.getCliente().getDireccionEnvio())) {
                             if (manejadorCliente.AgregarCliente(nuevoUsr.getCliente())) {
                                 if (manejadorCliente.AgregarUsuario(nuevoUsr)) {
+                                    JOptionPane.showMessageDialog(null, "Cliente Registrado Exitosamente");
+                                    Limpiar();
                                 }
                             }
                         } else {
