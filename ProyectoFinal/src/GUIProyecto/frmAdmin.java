@@ -38,6 +38,19 @@ public class frmAdmin extends javax.swing.JFrame {
         ValidarCampos();
     }
 
+        public void Limpiar(){
+        txtApellidos.setText(null);
+        txtNombres.setText(null);
+        txtCedula.setText(null);
+        jdcFechaNacimiento.setDate(null);
+        txtNumCelular.setText(null);
+        txtCorreo.setText(null);
+        txtCiudad.setText(null);
+        txtDireccion.setText(null);
+        jpsContrasena.setText(null);
+        grupoTipo.clearSelection();
+        grupoGenero.clearSelection();
+    }
     public boolean ValidarCampos() {
         ManejadorCliente manjCliente = new ManejadorCliente();
         //String numero = txtCedula.getText();
@@ -337,6 +350,11 @@ public class frmAdmin extends javax.swing.JFrame {
         btnNuevo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnNuevo.setText("Nuevo");
         btnNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoMouseClicked(evt);
+            }
+        });
 
         btnAtras.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAtras.setText("Atras");
@@ -498,12 +516,9 @@ public class frmAdmin extends javax.swing.JFrame {
                                     .addComponent(jdcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(txtNumCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(316, 316, 316))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(28, 28, 28)))
+                                            .addComponent(txtNumCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(315, 315, 315)
                                         .addComponent(jLabel8))
                                     .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -716,12 +731,12 @@ public class frmAdmin extends javax.swing.JFrame {
         ManejadorCliente manejadorCliente = new ManejadorCliente();
         if (user != null) {
             try {
-                int i=user.getId_usuario();
+                int i = user.getId_usuario();
                 user.getCliente().setId(i);
                 user.getCliente().getDireccionEnvio().setId_direccion(i);
-                
+
                 if (manejadorCliente.EliminarDireccion(user.getCliente().getDireccionEnvio())) {
-                    
+
                     if (manejadorCliente.EliminarCliente(user.getCliente())) {
                         if (manejadorCliente.EliminarUsuario(user)) {
 
@@ -735,6 +750,66 @@ public class frmAdmin extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnEliminarMouseClicked
+
+    private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
+        // TODO add your handling code here:
+        Usuario nuevoUsr = new Usuario();
+        Cliente clienteUsr = new Cliente();
+        Direccion dirUsr = new Direccion();
+        ManejadorCliente manejadorCliente = new ManejadorCliente();
+
+        try {
+
+            clienteUsr.setCedula(txtCedula.getText());
+            clienteUsr.setApellidos(txtApellidos.getText());
+            clienteUsr.setNombres(txtNombres.getText());
+            clienteUsr.setFechaNacimiento(new java.sql.Date(jdcFechaNacimiento.getDate().getTime()));
+            clienteUsr.setNumTelefono(txtNumCelular.getText());
+            int genero = getIdGenero();
+            clienteUsr.setGenero(genero);
+
+            int idPais = getIdPais();
+            dirUsr.setId_pais(idPais);
+            dirUsr.setCiudad(txtCiudad.getText());
+            dirUsr.setCallesRes(txtDireccion.getText());
+
+            String s1 = String.copyValueOf(jpsContrasena.getPassword());
+
+            if (ValidarCampos()) {
+                if (ValidarCorreo(txtCorreo.getText())) {
+                    nuevoUsr.setUsuario(txtCorreo.getText());
+
+                    int id_tipo = getIdTipo();
+                    int id = manejadorCliente.getIdClienteAgr() + 1;
+                    int idDir = manejadorCliente.getIdDirAgr() + 1;
+                    clienteUsr.setId(id);
+                    dirUsr.setId_direccion(idDir);
+                    clienteUsr.setDireccionEnvio(dirUsr);
+                    nuevoUsr.setId_tipo(id_tipo);
+                    nuevoUsr.setCliente(clienteUsr);
+                    nuevoUsr.setPass(s1);
+                    if (manejadorCliente.AgregarDireccion(nuevoUsr.getCliente().getDireccionEnvio())) {
+                        if (manejadorCliente.AgregarCliente(nuevoUsr.getCliente())) {
+                            if (manejadorCliente.AgregarUsuario(nuevoUsr)) {
+                                JOptionPane.showMessageDialog(null, "Cliente Registrado Exitosamente");
+                                Limpiar();
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se pudo agregar cliente");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Correo Invalido");
+                }
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmRegCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnNuevoMouseClicked
 
     /**
      * @param args the command line arguments

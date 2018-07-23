@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.*;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Usuario
@@ -167,18 +166,25 @@ public class frmPrincipal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for (Usuario user : users) {
-            System.out.println(user.getUsuario()+"->"+user.getPass());
-        }
-        for (Usuario user : users) {
+        if (txtcontrasena.getText().compareTo("admin123")==0 && txtusuario.getText().compareTo("admin")==0) {
+            frmAdmin admin= new frmAdmin();
+            admin.setVisible(true);
+            this.setVisible(false);
+        }else{
+            for (Usuario user : users) {
             if (user.getUsuario().compareTo(txtusuario.getText())==0 && user.getPass().compareTo(txtcontrasena.getText())==0) {
                 JOptionPane.showMessageDialog(null, "Inicio de sesion exitoso!");
+                PantallaInicio pantallaInicio= new PantallaInicio();
+                pantallaInicio.setVisible(true);
+                this.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrectos!");
                 txtusuario.setText("");
                 txtcontrasena.setText("");
             }
         }
+        }
+        
 
     }//GEN-LAST:event_btningresarMouseClicked
 
